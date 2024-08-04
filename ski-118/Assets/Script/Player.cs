@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] float forcePower = 10;
+
     private Rigidbody rb;
+
+    [SerializeField] private int hp = 3;
+    public int HP {  get { return hp; } set { hp = value; } }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,13 +25,7 @@ public class Player : MonoBehaviour
 
     private void Controller()
     {
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.AddForce(Vector3.left * 10,ForceMode.Acceleration);
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            rb.AddForce(Vector3.right * 10, ForceMode.Acceleration);
-        }
+        float horizontal = Input.GetAxis("Horizontal");
+        rb.AddForce(horizontal * Vector3.right * forcePower);
     }
 }
